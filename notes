@@ -1,0 +1,264 @@
+
+A1: necessario conhecer bem o js antes de usar ts.
+A2: 
+- playground no site do ts
+- union type
+- nodejs: arquitetura orientada a eventos, I/O nao bloqueante, single thread, i/o assincrono,
+otimizado para ambientes de alta concorrencia, roda codigos js no servidor.
+- npm:  node package manager, repositorio online para publicacao de projetos de codigo node,
+gerencia as dependencias e versoes de acordo com o package.json
+- npm:
+npm init - inicia um projeto, cria o package.json
+npm install package - instala um pacote ou todos os pacotes
+npm uninstall package - remove pacote
+npm update - atualiza os pacotes no package.son
+npm i -g package - instala o pacote como global, no SO.
+npm i package -S - instala o pacote e salva como dependencias do projeto
+npm i package -D - instala o pacote e salva como dependencia de desenvolvimento (eh oq nao vai pra producao
+usado so na minha maquina)
+
+express: prover uma ferramenta para servidores HTTP, sites...
+-framework web baseado em node
+-facilita o desenvolvimento de APIs
+-Servidor web
+-gerenciador de rotas
+
+- njinx = plataforma de server web
+
+A3 - Preparar o ambiente de desenvolvimento
+A6 - Instalar postgres e pgadmin
+
+A7 - let, const e var - qual usar?
+var (global) = variavel de escopo de funcao, js tem escopo definido por funcao nao por bloco, pode
+ser acessada em qql ponto do codigo
+
+let (default) = variavel com escopo de bloco, fora de funcao = variavel de escopo global,
+dentro de um bloco so fica acessivel somente nesse bloco
+
+const (final) = comportamento identico ao let, valor imutavel = final
+
+A8 - js, es6... arrow functions
+funcoes anonimas
+
+A9 - default parameters
+
+A10 - interpolacao de string - template string
+
+A11 - arrays e object destructuring
+ 
+A12 - implementando modulos - forma antiga
+
+A13 - es6 modules - forma nova
+
+A14 - tipos primitivos e inferencia
+
+A15 - class
+
+A16 - methods
+
+A17 - interface
+
+A18 - enum
+
+A19 - intro a aplicacao
+construcao de um webservice em ts, comunicado em postgres atraves do ormsequelize
+auth via token, bib passport
+tests automatizados, integracao e unitarios
+postman requisicoes HTTP
+aplicacao que autentica com um token
+
+A20 - intro a REST
+Representational State Transfer
+arquitetura permite ocorrer troca de infos entre apps atraves da rede
+sem estado - cada requisicao de um cliente ao servidor deve conter todas as infos pertinentes
+para que ela seja entendidade, com isso ela nao pode se aproveitar de nenhum recurso e contexto
+do servidor, sistema de autenticacao via sessao nao pode armazenar dados da sessao no servidor
+pode implementar, deve estar armazenado no cliente, mesmo os ids da sessao.
+
+Como garante a integridade dos nossos dados? cada requisicao deve enviar os parameters, login e senha
+ou token, nao podem ficar no servidor. devem estar contidas do metodo no header autorization no protocolo http
+
+Web service, apis ele implementa as restricoes do rest ela eh restFUL
+
+Estrutura da requisicao
+
+Endpoint: URL, endereco web. http:meusite.com destino final
+query: parametros passado para as rotas ?parametro=valor
+recurso: um caminho diferente ao dominio
+parametros: recurso/1 pega o id 1
+header: dados complementares enviados na requisicao como, token, tipo de midia...
+method: tipo da requisicao. http possui metodos get, post, delete, head, options, put, trace
+connect e patch
+data: o corpo da requisicao
+---
+
+GET /rota/id - retorna um registro com base no id
+put /rota/id - att um registro com base no id. todos os campos devem ser enviados
+patch /rota/id - atualiza um registro com base no id. atualiza apenas as infos desejadas
+delete /rota/id - exclui um registro com base no id
+get /rota - retorna todos os registros
+post /rota - cria um novo registro
+
+estrutura da reposta
+
+status code - um numero de 100 a 599 que indica o status da operacao
+data - corpo do retorno
+header - infos complementares enviadas pelo server
+
+1xx - resposta provisoria
+2xx - requisicao bem sucedida
+3xx - acoes pendentes para complementar a requisicao
+4xx - erro por parte do cliente
+5xx - erro por parte do server
+
+200 - ok
+201 - ok em post
+301 - redirect permanente
+302 - redirect temporario
+304 - nada foi alterado na requisicao e/ou resposta
+401 - acesso nao autorizado
+403 - acao proibida
+404 - recurso inexistente
+500 - erro interno do servidor
+
+--Iniciando o desenvolvimento do projeto pratico--
+
+A22 - criando o banco de dados
+criacao do bd ts-api e ts-api-test
+
+A23 - criando o projeto - NPM e Package.json
+npm init
+
+A24 - instalando as dependencias do 
+body-parser parsear forms da requisicao
+express framework para trabalhar com as rotas
+http criar servidor
+morgan gerar relatorios do console
+pg conexao com o node e postgres
+npm i body-parser express http morgan pg -S
+npm i ts-node -D so no ambiente de desenvolvimento
+
+A25 - Bibs de terceiros - @types como dependencia de desenvolvimento
+npm i @types/express @types/body-parser @types/morgan -D
+
+A26 - Entendendo o tsconfig.json
+
+A27 - Instalando o Sequelize CLI 
+
+
+npm i sequelize @types/sequelize -D
+
+A28 - Definindo a Estrutura de Diretorios Inicial
+mkdir -p server/{api,config,modules}
+modules - o core da aplicacao, controllers, service, interfaces, modulos ...user, auth
+api - classe principal, que se comunica com o webservice, rotas, respostas - responsavel
+ por receber as requisicoes
+e enviar as respostas pros clientes
+config - ambiente que estamos trabalhando, definir propriedades, parametros de configuracao
+numero de porta, url para bd
+
+A29 - Criando o servidor
+touch server/server.ts
+server.listen(3000, () => console.log('Server esta rodando na porta 3000'));
+() => funcao de callback
+
+npm install typescript -D
+
+npm start
+npm run builded
+
+A30 - Criando a Classe Principal da API
+
+A31 - Criando Middleware Error Handler
+
+A32 - Criando as Rotas da API
+
+A33 - Criando Mod Config - Isolando Parametros de configuracao da aplicacao
+
+Press Ctrl+Shift+B to open a list of tasks in VS Code and select tsc: watch - tsconfig.json.
+
+A34 - importando modulos - integrando componentes da aplicacao
+
+A35 - Refatorando o servidor - deixando mais completo
+
+A36 - Testes Automatizados de Software
+
+A37 - Oq eh TDD (Test-Driven Development)
+escrita do Testes
+execucao e falha
+implementacao do menor codigo possivel para que o teste passe
+
+A38 - Testes unitarios
+
+A39 - Introducao - Testes de integracao
+sucede o teste unitarios
+nao necessita de mocks
+modulos da aplicacao sao testados em conjunto
+garante o funcionamento de um fluxo de execucao
+
+A40 - Preparando o ambiente de Testes
+npm i mocha chai supertest testdouble -D
+npm i @types/mocha @types/chai @types/supertest -D
+
+mkdir -p tests/{integration/config,unit/config}
+
+A41 - Skelleton de Testes unitarios
+npm run unit-test
+
+A44 - Criando o modulo user - refatorando as rotas
+
+A45 - Implementando metodos para atender as rotas
+
+A46 - Rodando o Sequelize
+
+A47 - Modelando dados com sequelize e sincronizando
+com o banco de dados
+
+A48 - Subindo a aplicacao - tabela criada no BD
+
+A49 - Implementando Controller
+
+model, service, controller
+vendo o bd so sobra o controller
+
+A50 - Refatorar metodos para atender as rotas
+
+A58 - Criacao interface user
+
+A59 - Implementando a estrutura do service
+camada service - responsavel pela interacao direta com o bd, no service que estara a logica
+de negocio
+
+A60 - CRUD service - implementacao do metodo create
+A61 - CRUD service - getall
+A62 - getbyid
+A63 - getbyemail
+A65 - delete
+pq todos eles retornam? a operacao do bd atraves do sequelize, retorna uma promisse, onde
+sera tratada nos controllers, quem trata as infos serao outras camadas da aplicacao.
+A66 - Refatorando os testes unitarios - testando metodo service create
+
+A73 - CRUD Controller - Imp do Metodo getall
+implementar o controller para que ele se comunique com o service
+
+A74 - CreateUser
+
+
+A79 - Criando modulo reutilizavel de success Handler
+
+A80 - Criando .. error handler
+
+A81 - error handler para as operacoes do BD
+
+A82 - refatorando o controller - usando os handlers criados
+lodash funcao partial - invocar outras funcoes sem alterar o contexto da funcao executora
+npm i lodash -S
+npm i @types/lodash -D
+
+
+
+
+
+
+
+
